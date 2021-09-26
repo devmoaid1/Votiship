@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "837889122646",
+    "project_id": "votiship",
+    "storage_bucket": "votiship.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837889122646:android:3c76f2deb19b83394bb6f7",
+        "android_client_info": {
+          "package_name": "com.example.votiship"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "837889122646-i2m082cb1vgi5g2c74dtavvgqc1e6scr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw9fGjNaJmshle8F7FUCpuI2ekuKOtth4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "837889122646-i2m082cb1vgi5g2c74dtavvgqc1e6scr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
