@@ -48,6 +48,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 duration: Duration(seconds: 1),
               ),
             );
+          } else if (state is AddPresident) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('created'),
+                duration: Duration(seconds: 1),
+              ),
+            );
           }
         },
         builder: (context, state) {

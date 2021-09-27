@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:votiship/data/Presidents_service.dart';
@@ -26,12 +28,13 @@ class PresidentBloc extends Bloc<PresidentEvent, PresidentState> {
       final president = event.newPresident;
       try {
         // var addedPresident =
-        await presidentsService.addPresident(president: president);
+        var result = await presidentsService.addPresident(president: president);
         var list = await presidentsService.getAllPresidents();
-        // yield AddedPresident(addedPresident: addedPresident);
+        yield AddedPresident(addedPresident: result);
         yield PresidentsList(presidents: list);
       } catch (err) {
         yield ErrorMassage(massage: err.toString());
+        print(err.toString());
       }
     }
 
