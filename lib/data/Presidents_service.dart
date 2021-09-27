@@ -13,7 +13,7 @@ class PresidentDataService {
   final rest = RestService();
 
   Future<List<President>> getAllPresidents() async {
-    final listJson = await rest.get('quotes');
+    final listJson = await rest.get('presidents');
 
     return (listJson as List)
         .map((itemJson) => President.fromJson(itemJson))

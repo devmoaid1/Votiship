@@ -19,7 +19,7 @@ class RestService {
   // TODO: change the baseUrl to your own REST API service hosted on Firebase (or heroku)
 
   Uri baseUrl(String endPoint) =>
-      Uri.parse("http://localhost:5001/votiship/us-central1/app/$endPoint");
+      Uri.parse("http://10.0.2.2:5001/votiship/us-central1/app/$endPoint");
 
   Future get(String endpoint) async {
     final response = await http.get(baseUrl(endpoint));

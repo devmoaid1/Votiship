@@ -15,6 +15,7 @@ class PresidentBloc extends Bloc<PresidentEvent, PresidentState> {
       yield Loading();
       try {
         var list = await presidentsService.getAllPresidents();
+
         yield PresidentsList(presidents: list);
       } catch (err) {
         yield ErrorMassage(massage: err.toString());
@@ -24,9 +25,11 @@ class PresidentBloc extends Bloc<PresidentEvent, PresidentState> {
     if (event is AddPresident) {
       final president = event.newPresident;
       try {
-        var addedPresident =
-            await presidentsService.addPresident(president: president);
-        yield AddedPresident(addedPresident: addedPresident);
+        // var addedPresident =
+        await presidentsService.addPresident(president: president);
+        var list = await presidentsService.getAllPresidents();
+        // yield AddedPresident(addedPresident: addedPresident);
+        yield PresidentsList(presidents: list);
       } catch (err) {
         yield ErrorMassage(massage: err.toString());
       }
@@ -36,7 +39,11 @@ class PresidentBloc extends Bloc<PresidentEvent, PresidentState> {
       final id = event.id;
       final votes = event.votes;
       try {
-        await presidentsService.votePresident(id: id, vote: votes);
+        var newPresident =
+            await presidentsService.votePresident(id: id, vote: votes);
+        var list = await presidentsService.getAllPresidents();
+        yield VotedState(votedPresident: newPresident);
+        yield PresidentsList(presidents: list);
       } catch (err) {
         yield ErrorMassage(massage: err.toString());
       }
