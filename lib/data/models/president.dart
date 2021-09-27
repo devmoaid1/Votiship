@@ -1,4 +1,4 @@
-class president {
+class President {
   String description;
   String avatar;
   String name;
@@ -6,7 +6,7 @@ class president {
   int votes;
   String id;
 
-  president(
+  President(
       {this.description,
       this.avatar,
       this.name,
@@ -14,7 +14,7 @@ class president {
       this.votes,
       this.id});
 
-  president.fromJson(Map<String, dynamic> json) {
+  President.fromJson(Map<String, dynamic> json) {
     description = json['description'];
     avatar = json['avatar'];
     name = json['name'];
