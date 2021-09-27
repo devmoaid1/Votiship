@@ -2,16 +2,17 @@ import 'dart:convert';
 import 'Rest_service.dart';
 import 'models/president.dart';
 
-class QuoteDataService {
-  static final QuoteDataService _instance = QuoteDataService._constructor();
-  factory QuoteDataService() {
+class PresidentDataService {
+  static final PresidentDataService _instance =
+      PresidentDataService._constructor();
+  factory PresidentDataService() {
     return _instance;
   }
 
-  QuoteDataService._constructor();
+  PresidentDataService._constructor();
   final rest = RestService();
 
-  Future<List<President>> getAllQuotes() async {
+  Future<List<President>> getAllPresidents() async {
     final listJson = await rest.get('quotes');
 
     return (listJson as List)
@@ -19,21 +20,21 @@ class QuoteDataService {
         .toList();
   }
 
-  Future deleteQuote({String id}) async {
+  Future deletePresident({String id}) async {
     await rest.delete('presidents/$id');
   }
 
-  Future<President> createQuote({President president}) async {
+  Future<President> addPresident({President president}) async {
     final json = await rest.post('presidents', data: president);
     return President.fromJson(json);
   }
 
-  Future<President> getQuote({String id}) async {
+  Future<President> getPresident({String id}) async {
     final quote = await rest.get('presidents/$id');
     return json.decode(quote);
   }
 
-  Future<President> updateLike({String id, int vote}) async {
+  Future<President> votePresident({String id, int vote}) async {
     final quote = await rest.patch('presidents/$id', data: {'votes': vote});
     return President.fromJson(quote);
   }

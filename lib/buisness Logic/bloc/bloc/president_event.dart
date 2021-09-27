@@ -7,4 +7,26 @@ abstract class PresidentEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetPreseidents extends PresidentEvent {}
+class GetAllPresident extends PresidentEvent {}
+
+class VotePresident extends PresidentEvent {
+  String id;
+
+  int votes;
+  VotePresident({this.id, this.votes});
+}
+
+class AddPresident extends PresidentEvent {
+  President newPresident;
+  AddPresident({this.newPresident});
+}
+
+class SetPresident extends PresidentEvent {
+  String id;
+  SetPresident({this.id});
+}
+
+class GetPresident extends PresidentEvent {
+  String id;
+  GetPresident({this.id});
+}
