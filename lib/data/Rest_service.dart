@@ -40,6 +40,7 @@ class RestService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     }
+
     throw jsonDecode(response.statusCode.toString());
   }
 

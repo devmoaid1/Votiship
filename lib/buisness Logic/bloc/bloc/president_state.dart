@@ -40,3 +40,8 @@ class AddedPresident extends PresidentState {
   President addedPresident;
   AddedPresident({this.addedPresident});
 }
+
+class DeletedPresident extends PresidentState {
+  String id;
+  DeletedPresident({this.id});
+}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:votiship/buisness%20Logic/bloc/bloc/president_bloc.dart';
 import 'package:votiship/data/models/president.dart';
+import 'package:votiship/presentation/widgets/Presidents_Container.dart';
 import 'package:votiship/routes_constants.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -55,6 +56,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 duration: Duration(seconds: 1),
               ),
             );
+          } else if (state is DeletePresident) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('deleted'),
+                duration: Duration(seconds: 1),
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -70,45 +78,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.blueGrey,
                 ),
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: Container(
-                      color: Color(0xff1E1C1C),
-                      child: ListTile(
-                        focusColor: Colors.grey[100],
-                        onTap: () {
-                          bloc.add(VotePresident(
-                              id: presidents[index].id,
-                              votes: presidents[index].votes + 1));
-                        },
-                        leading: CircleAvatar(
-                          radius: 30,
-                          backgroundImage:
-                              NetworkImage(presidents[index].avatar, scale: 30),
-                        ),
-                        title: Text(presidents[index].name,
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white)),
-                        subtitle: Text(presidents[index].location,
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.grey)),
-                        trailing: CircleAvatar(
-                          backgroundColor: Colors.red[400],
-                          child: Text(
-                            presidents[index].votes.toString(),
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ),
-                    ),
+                  final onTap = () => {
+                        bloc.add(VotePresident(
+                            id: presidents[index].id,
+                            votes: presidents[index].votes + 1))
+                      };
+
+                  final onLongPress = () => {
+                        bloc.add(DeletePresident(id: presidents[index].id)),
+                        print("pressed")
+                      };
+
+                  return PresidentContainer(
+                    avatar: presidents[index].avatar,
+                    name: presidents[index].name,
+                    location: presidents[index].location,
+                    votes: presidents[index].votes,
+                    handleTap: onTap,
+                    handleOnLongPressed: onLongPress,
                   );
                 },
               ),

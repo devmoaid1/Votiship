@@ -30,3 +30,8 @@ class GetPresident extends PresidentEvent {
   String id;
   GetPresident({this.id});
 }
+
+class DeletePresident extends PresidentEvent {
+  String id;
+  DeletePresident({this.id});
+}

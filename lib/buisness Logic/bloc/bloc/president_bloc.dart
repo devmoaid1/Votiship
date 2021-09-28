@@ -22,23 +22,21 @@ class PresidentBloc extends Bloc<PresidentEvent, PresidentState> {
       } catch (err) {
         yield ErrorMassage(massage: err.toString());
       }
-    }
-
-    if (event is AddPresident) {
+    } else if (event is AddPresident) {
       final president = event.newPresident;
       try {
-        // var addedPresident =
-        var result = await presidentsService.addPresident(president: president);
+        var addedPresident =
+            await presidentsService.addPresident(president: president);
+        yield Loading();
+
         var list = await presidentsService.getAllPresidents();
-        yield AddedPresident(addedPresident: result);
+        yield AddedPresident(addedPresident: addedPresident);
         yield PresidentsList(presidents: list);
       } catch (err) {
         yield ErrorMassage(massage: err.toString());
         print(err.toString());
       }
-    }
-
-    if (event is VotePresident) {
+    } else if (event is VotePresident) {
       final id = event.id;
       final votes = event.votes;
       try {
@@ -50,9 +48,7 @@ class PresidentBloc extends Bloc<PresidentEvent, PresidentState> {
       } catch (err) {
         yield ErrorMassage(massage: err.toString());
       }
-    }
-
-    if (event is GetPresident) {
+    } else if (event is GetPresident) {
       final id = event.id;
       yield Loading();
       try {
@@ -61,15 +57,21 @@ class PresidentBloc extends Bloc<PresidentEvent, PresidentState> {
       } catch (err) {
         yield ErrorMassage(massage: err.toString());
       }
-    }
-
-    if (event is SetPresident) {
+    } else if (event is SetPresident) {
       final id = event.id;
       try {
         yield PresidentId(id: id);
       } catch (err) {
         yield ErrorMassage(massage: err.toString());
       }
+    } else if (event is DeletePresident) {
+      try {
+        final id = event.id;
+        await presidentsService.deletePresident(id: id);
+        yield Loading();
+        var list = await presidentsService.getAllPresidents();
+        yield PresidentsList(presidents: list);
+      } catch (err) {}
     }
   }
 }
