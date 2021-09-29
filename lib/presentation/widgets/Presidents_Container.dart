@@ -7,6 +7,7 @@ class PresidentContainer extends StatelessWidget {
   final int votes;
   Function handleTap;
   Function handleOnLongPressed;
+  Function handleReadMore;
 
   PresidentContainer(
       {Key key,
@@ -15,7 +16,8 @@ class PresidentContainer extends StatelessWidget {
       this.votes,
       this.location,
       this.handleTap,
-      this.handleOnLongPressed})
+      this.handleOnLongPressed,
+      this.handleReadMore})
       : super(key: key);
 
   @override
@@ -38,11 +40,29 @@ class PresidentContainer extends StatelessWidget {
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                   color: Colors.white)),
-          subtitle: Text(this.location,
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.grey)),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(this.location,
+                  style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey)),
+              SizedBox(
+                height: 6,
+              ),
+              GestureDetector(
+                onTap: this.handleReadMore,
+                child: Text(
+                  "Read more >>",
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.red[400]),
+                ),
+              ),
+            ],
+          ),
           trailing: CircleAvatar(
             backgroundColor: Colors.red[400],
             child: Text(

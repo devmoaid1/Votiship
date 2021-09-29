@@ -89,6 +89,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         print("pressed")
                       };
 
+                  final readMore = () => {
+                        bloc.add(SetPresident(id: presidents[index].id)),
+                        Navigator.pushNamed(context, detailsScreenRoute),
+                        print("Navigated")
+                      };
+
                   return PresidentContainer(
                     avatar: presidents[index].avatar,
                     name: presidents[index].name,
@@ -96,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     votes: presidents[index].votes,
                     handleTap: onTap,
                     handleOnLongPressed: onLongPress,
+                    handleReadMore: readMore,
                   );
                 },
               ),
