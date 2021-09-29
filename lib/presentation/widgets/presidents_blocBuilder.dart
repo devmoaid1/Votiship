@@ -30,6 +30,8 @@ Widget buildPresidentsBloc(PresidentBloc bloc) {
             duration: Duration(seconds: 1),
           ),
         );
+      } else if (state is PresidentId) {
+        Navigator.pushNamed(context, detailsScreenRoute);
       }
     },
     builder: (context, state) {
@@ -71,7 +73,6 @@ Widget buildPresidentsList(List<President> presidents, PresidentBloc bloc) {
 
       final readMore = () => {
             bloc.add(SetPresident(id: presidents[index].id)),
-            Navigator.pushNamed(context, detailsScreenRoute),
             print("Navigated")
           };
 

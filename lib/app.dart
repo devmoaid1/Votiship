@@ -6,9 +6,20 @@ import 'package:votiship/data/Presidents_service.dart';
 import 'package:votiship/routes_constants.dart';
 import 'routes.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
-  final route = AppRoute();
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final AppRoute route = AppRoute();
+  @override
+  void dispose() {
+    route.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

@@ -5,10 +5,10 @@ import 'package:votiship/routes_constants.dart';
 
 class DetailsScreen extends StatelessWidget {
   DetailsScreen() : super();
-  PresidentBloc bloc;
+  // PresidentBloc bloc;
   @override
   Widget build(BuildContext context) {
-    bloc = BlocProvider.of<PresidentBloc>(context);
+    final bloc = context.read<PresidentBloc>();
     return Scaffold(
         body: BlocConsumer<PresidentBloc, PresidentState>(
       listener: (context, state) {
