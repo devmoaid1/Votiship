@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:votiship/data/models/president.dart';
 
 class PresidentContainer extends StatelessWidget {
-  final String avatar;
-  final String name;
-  final String location;
-  final int votes;
-  Function handleTap;
-  Function handleOnLongPressed;
-  Function handleReadMore;
+  final President president;
+  final Function handleTap;
+  final Function handleOnLongPressed;
+  final Function handleReadMore;
 
   PresidentContainer(
       {Key key,
-      this.avatar,
-      this.name,
-      this.votes,
-      this.location,
+      this.president,
       this.handleTap,
       this.handleOnLongPressed,
       this.handleReadMore})
@@ -32,9 +27,9 @@ class PresidentContainer extends StatelessWidget {
           onTap: this.handleTap,
           leading: CircleAvatar(
             radius: 30,
-            backgroundImage: NetworkImage(this.avatar, scale: 30),
+            backgroundImage: NetworkImage(this.president.avatar, scale: 30),
           ),
-          title: Text(this.name,
+          title: Text(this.president.name,
               textAlign: TextAlign.justify,
               style: TextStyle(
                   fontSize: 20,
@@ -43,7 +38,7 @@ class PresidentContainer extends StatelessWidget {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(this.location,
+              Text(this.president.location,
                   style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w400,
@@ -66,7 +61,7 @@ class PresidentContainer extends StatelessWidget {
           trailing: CircleAvatar(
             backgroundColor: Colors.red[400],
             child: Text(
-              this.votes.toString(),
+              this.president.votes.toString(),
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,

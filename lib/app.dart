@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:votiship/routes_constants.dart';
-import 'routes.dart' as router;
+import 'routes.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  final route = AppRoute();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: homeViewRoute,
-      onGenerateRoute: router.createRoute,
+      onGenerateRoute: route.createRoute,
     );
   }
 }

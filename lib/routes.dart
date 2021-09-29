@@ -6,30 +6,39 @@ import 'package:votiship/presentation/screens/details_screen.dart';
 import 'package:votiship/presentation/screens/presedints_screen.dart';
 import 'package:votiship/routes_constants.dart';
 
-Route<dynamic> createRoute(RouteSettings settings) {
-  switch (settings.name) {
-    case homeViewRoute:
-      return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-                create: (context) =>
-                    PresidentBloc(presidentsService: PresidentDataService()),
-                child: HomeScreen(),
-              ));
+class AppRoute {
+  PresidentDataService presidentDataService;
+  PresidentBloc presidentBloc;
 
-    case detailsScreenRoute:
-      return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-                create: (context) =>
-                    PresidentBloc(presidentsService: PresidentDataService()),
-                child: DetailsScreen(),
-              ));
+  AppRoute() {
+    presidentDataService = PresidentDataService();
+    presidentBloc = PresidentBloc(presidentsService: presidentDataService);
+  }
 
-    default:
-      return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-                create: (context) =>
-                    PresidentBloc(presidentsService: PresidentDataService()),
-                child: HomeScreen(),
-              ));
+  Route<dynamic> createRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case homeViewRoute:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => presidentBloc,
+                  child: HomeScreen(),
+                ));
+
+      case detailsScreenRoute:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) =>
+                      PresidentBloc(presidentsService: presidentDataService),
+                  child: DetailsScreen(),
+                ));
+
+      default:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) =>
+                      PresidentBloc(presidentsService: PresidentDataService()),
+                  child: HomeScreen(),
+                ));
+    }
   }
 }

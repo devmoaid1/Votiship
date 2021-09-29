@@ -40,79 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: BlocConsumer<PresidentBloc, PresidentState>(
-        listener: (context, state) {
-          if (state is VotedState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('voted!'),
-                duration: Duration(seconds: 1),
-              ),
-            );
-          } else if (state is AddPresident) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('created'),
-                duration: Duration(seconds: 1),
-              ),
-            );
-          } else if (state is DeletePresident) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('deleted'),
-                duration: Duration(seconds: 1),
-              ),
-            );
-          }
-        },
-        builder: (context, state) {
-          if (state is Loading) {
-            return CircularProgressIndicator();
-          } else if (state is PresidentsList) {
-            var presidents = state.presidents;
-            return Container(
-              color: Colors.black,
-              child: ListView.separated(
-                itemCount: presidents.length,
-                separatorBuilder: (context, index) => Divider(
-                  color: Colors.blueGrey,
-                ),
-                itemBuilder: (context, index) {
-                  final onTap = () => {
-                        bloc.add(VotePresident(
-                            id: presidents[index].id,
-                            votes: presidents[index].votes + 1))
-                      };
-
-                  final onLongPress = () => {
-                        bloc.add(DeletePresident(id: presidents[index].id)),
-                        print("pressed")
-                      };
-
-                  final readMore = () => {
-                        bloc.add(SetPresident(id: presidents[index].id)),
-                        Navigator.pushNamed(context, detailsScreenRoute),
-                        print("Navigated")
-                      };
-
-                  return PresidentContainer(
-                    avatar: presidents[index].avatar,
-                    name: presidents[index].name,
-                    location: presidents[index].location,
-                    votes: presidents[index].votes,
-                    handleTap: onTap,
-                    handleOnLongPressed: onLongPress,
-                    handleReadMore: readMore,
-                  );
-                },
-              ),
-            );
-          } else if (state is ErrorMassage) {
-            return ErrorWidget(state.massage.toString());
-          }
-          return Container();
-        },
-      ),
+      body: buildPresidentsBloc(),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -144,6 +72,82 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget buildPresidentsBloc() {
+    return BlocConsumer<PresidentBloc, PresidentState>(
+      listener: (context, state) {
+        if (state is VotedState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('voted!'),
+              duration: Duration(seconds: 1),
+            ),
+          );
+        } else if (state is AddPresident) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('created'),
+              duration: Duration(seconds: 1),
+            ),
+          );
+        } else if (state is DeletePresident) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('deleted'),
+              duration: Duration(seconds: 1),
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state is Loading) {
+          return CircularProgressIndicator();
+        } else if (state is PresidentsList) {
+          var presidents = state.presidents;
+          return Container(
+            color: Colors.black,
+            child: buildPresidentsList(presidents),
+          );
+        } else if (state is ErrorMassage) {
+          return ErrorWidget(state.massage.toString());
+        }
+        return Container();
+      },
+    );
+  }
+
+  Widget buildPresidentsList(List<President> presidents) {
+    return ListView.separated(
+      itemCount: presidents.length,
+      separatorBuilder: (context, index) => Divider(
+        color: Colors.blueGrey,
+      ),
+      itemBuilder: (context, index) {
+        final onTap = () => {
+              bloc.add(VotePresident(
+                  id: presidents[index].id, votes: presidents[index].votes + 1))
+            };
+
+        final onLongPress = () => {
+              bloc.add(DeletePresident(id: presidents[index].id)),
+              print("pressed")
+            };
+
+        final readMore = () => {
+              bloc.add(SetPresident(id: presidents[index].id)),
+              Navigator.pushNamed(context, detailsScreenRoute),
+              print("Navigated")
+            };
+
+        return PresidentContainer(
+          president: presidents[index],
+          handleTap: onTap,
+          handleOnLongPressed: onLongPress,
+          handleReadMore: readMore,
+        );
+      },
     );
   }
 }
