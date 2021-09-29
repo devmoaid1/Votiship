@@ -26,9 +26,8 @@ class AppRoute {
 
       case detailsScreenRoute:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) =>
-                      PresidentBloc(presidentsService: presidentDataService),
+            builder: (context) => BlocProvider.value(
+                  value: BlocProvider.of<PresidentBloc>(context),
                   child: DetailsScreen(),
                 ));
 

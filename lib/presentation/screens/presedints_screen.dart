@@ -23,15 +23,16 @@ class _HomeScreenState extends State<HomeScreen> {
     print(bloc.toString());
   }
 
-  @override
-  void dispose() {
-    bloc.close();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   bloc.close();
+  //   super.dispose();
+  // }
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
         title: Center(
           child: Text(
@@ -48,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Flexible(
             flex: 1,
             child: FloatingActionButton(
+              heroTag: "add",
               child: Icon(Icons.add),
               onPressed: () {
                 var president = President(
@@ -65,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Flexible(
             flex: 1,
             child: FloatingActionButton(
+              heroTag: "navigate",
               child: Icon(Icons.navigate_next),
               onPressed: () {
                 Navigator.pushNamed(context, detailsScreenRoute);

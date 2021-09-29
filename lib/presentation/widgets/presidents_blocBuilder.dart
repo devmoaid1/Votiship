@@ -34,7 +34,10 @@ Widget buildPresidentsBloc(PresidentBloc bloc) {
     },
     builder: (context, state) {
       if (state is Loading) {
-        return CircularProgressIndicator();
+        return Center(
+            child: CircularProgressIndicator(
+          backgroundColor: Colors.red[400],
+        ));
       } else if (state is PresidentsList) {
         var presidents = state.presidents;
         return Container(
