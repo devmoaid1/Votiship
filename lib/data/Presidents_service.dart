@@ -30,12 +30,12 @@ class PresidentDataService {
   }
 
   Future<President> getPresident({String id}) async {
-    final quote = await rest.get('presidents/$id');
-    return json.decode(quote);
+    final president = await rest.get('presidents/$id');
+    return President.fromJson(president);
   }
 
   Future<President> votePresident({String id, int vote}) async {
-    final quote = await rest.patch('presidents/$id', data: {'votes': vote});
-    return President.fromJson(quote);
+    final president = await rest.patch('presidents/$id', data: {'votes': vote});
+    return President.fromJson(president);
   }
 }

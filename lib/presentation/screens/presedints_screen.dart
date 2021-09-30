@@ -38,38 +38,21 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: buildPresidentsBloc(bloc),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Flexible(
-            flex: 1,
-            child: FloatingActionButton(
-              heroTag: "add",
-              child: Icon(Icons.add),
-              onPressed: () {
-                var president = President(
-                    avatar:
-                        "https://apex.aero/wp-content/uploads/2020/08/Calin-Rovinescu-new-image-1-e1534786641608.jpg",
-                    description: "new description",
-                    location: "Norway",
-                    name: "Jossef Kareem",
-                    votes: 0);
-                bloc.add(AddPresident(newPresident: president));
-              },
-            ),
-          ),
-          SizedBox(width: 10),
-          Flexible(
-            flex: 1,
-            child: FloatingActionButton(
-              heroTag: "navigate",
-              child: Icon(Icons.navigate_next),
-              onPressed: () {
-                Navigator.pushNamed(context, detailsScreenRoute);
-              },
-            ),
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.red[400],
+        hoverColor: Colors.red[600],
+        heroTag: "add",
+        child: Icon(Icons.add),
+        onPressed: () {
+          var president = President(
+              avatar:
+                  "https://apex.aero/wp-content/uploads/2020/08/Calin-Rovinescu-new-image-1-e1534786641608.jpg",
+              description: "new description",
+              location: "Norway",
+              name: "Jossef Kareem",
+              votes: 0);
+          bloc.add(AddPresident(newPresident: president));
+        },
       ),
     );
   }

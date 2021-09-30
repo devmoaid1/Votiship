@@ -73,7 +73,7 @@ Widget buildPresidentsList(List<President> presidents, PresidentBloc bloc) {
 
       final readMore = () => {
             bloc.add(SetPresident(id: presidents[index].id)),
-            print("Navigated")
+            print("set President")
           };
 
       return PresidentContainer(
