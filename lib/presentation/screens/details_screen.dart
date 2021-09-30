@@ -3,12 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:votiship/buisness%20Logic/bloc/bloc/president_bloc.dart';
 import 'package:votiship/routes_constants.dart';
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
   DetailsScreen() : super();
-  // PresidentBloc bloc;
+
+  @override
+  _DetailsScreenState createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
+  PresidentBloc bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    bloc = context.read<PresidentBloc>();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<PresidentBloc>();
     return Scaffold(
         body: BlocConsumer<PresidentBloc, PresidentState>(
       listener: (context, state) {

@@ -23,12 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     print(bloc.toString());
   }
 
-  // @override
-  // void dispose() {
-  //   bloc.close();
-  //   super.dispose();
-  // }
-
+  //
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

@@ -7,9 +7,6 @@ import 'package:votiship/presentation/screens/presedints_screen.dart';
 import 'package:votiship/routes_constants.dart';
 
 class AppRoute {
-  final PresidentBloc _presidentBloc =
-      PresidentBloc(presidentsService: PresidentDataService());
-
   // AppRoute() {
   //   presidentDataService = PresidentDataService();
   //   presidentBloc = PresidentBloc(presidentsService: presidentDataService);
@@ -18,29 +15,13 @@ class AppRoute {
   Route<dynamic> createRoute(RouteSettings settings) {
     switch (settings.name) {
       case homeViewRoute:
-        return MaterialPageRoute(
-            builder: (context) => BlocProvider.value(
-                  value: _presidentBloc,
-                  child: HomeScreen(),
-                ));
+        return MaterialPageRoute(builder: (context) => HomeScreen());
 
       case detailsScreenRoute:
-        return MaterialPageRoute(
-            builder: (newContext) => BlocProvider.value(
-                  value: _presidentBloc,
-                  child: DetailsScreen(),
-                ));
+        return MaterialPageRoute(builder: (newContext) => DetailsScreen());
 
       default:
-        return MaterialPageRoute(
-            builder: (context) => BlocProvider.value(
-                  value: _presidentBloc,
-                  child: HomeScreen(),
-                ));
+        return MaterialPageRoute(builder: (context) => HomeScreen());
     }
-  }
-
-  void dispose() {
-    _presidentBloc.close();
   }
 }
