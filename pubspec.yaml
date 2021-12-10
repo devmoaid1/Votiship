@@ -21,7 +21,6 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  cloud_firestore: ^2.5.3
   cupertino_icons: ^1.0.2
   equatable: ^2.0.3
   flutter:
